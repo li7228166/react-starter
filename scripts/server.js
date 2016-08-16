@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
     port = 3000;
     var webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
-        webpackDevConfig = require('./webpack/webpack.config.dev.js');
+        webpackDevConfig = require('./webpack.config.dev.js');
 
     var compiler = webpack(webpackDevConfig);
     app.use(webpackDevMiddleware(compiler, {
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
     }));
     app.use(webpackHotMiddleware(compiler));
 } else {
-    app.use(express.static(path.join(__dirname, 'dist')))
+    app.use(express.static(path.join(__dirname, '..', 'dist')))
 }
 
 app.listen(port, host, function () {

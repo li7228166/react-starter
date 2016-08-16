@@ -7,15 +7,12 @@ var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
 var webpackConfig = require('./webpack.config.js');
+var packageConfig = require('../package.json');
 
 module.exports = merge(webpackConfig, {
     entry: {
         'app': path.join(__dirname, '..', 'app', 'js', 'index'),
-        'vendor': [
-            'react',
-            'react-dom',
-            'babel-polyfill'
-        ]
+        'vendor': Object.keys(packageConfig.dependencies)
     },
     output: {
         path: path.join(__dirname, '..', 'dist'),

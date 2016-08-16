@@ -11,17 +11,7 @@
 
 ### 项目说明：
 
-没有预置react全家桶，可根据项目需要自行install，如果install了其他依赖，建议修改以下文件，已保证业务功能代码和公共依赖代码的分离
-
-*/webpack/webpack.config.prod.js*
-```json
-'vendor': [
-	'react',
-	'react-dom',
-	'babel-polyfill'
-]
-```
-
+没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js
 
 ### 项目开始
 
