@@ -1,8 +1,8 @@
 {
   "ssh": {
     "host": "172.16.130.136",
-    "username": "root",
-    "password": "e7ax1976zerotest",
+    "username": "",
+    "password": "",
     "port": "22",
     "remotePath": "/data/html/admin/aaaa"
   }
