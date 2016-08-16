@@ -18,7 +18,7 @@
 ```
 $ git clone https://github.com/li7228166/react-starter.git
 $ cd react-starter
-$ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](https://npm.taobao.org/ "cnpm")）
+$ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](https://npm.taobao.org/)）
 ```
 
 ### 预置命令
@@ -27,7 +27,7 @@ $ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](htt
 $ npm start
 ```
 
-浏览器会自动打开 http://localhost:3000
+浏览器会自动打开 [http://localhost:3000](http://localhost:3000)
 推荐设置chrome为默认浏览器，what？你不用chrome，额……好吧
 
 #### build
@@ -42,7 +42,7 @@ $ npm run build
 $ npm run release
 ```
 
-生成待部署文件到dist目录，并打开浏览器 http://localhost:8080 ，在本地预览待部署的项目
+生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080) ，在本地预览待部署的项目
 
 
 #### 部署
