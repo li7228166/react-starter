@@ -1,6 +1,22 @@
+var path = require('path');
+
 module.exports = {
-    extensions: ['', '.js', '.jsx'],
-    alias: {},
+    resolve: {
+        alias: {
+            js: path.join(__dirname, "..", "app/js"),
+            style: path.join(__dirname, "..", "app/style"),
+            assets: path.join(__dirname, "..", "app/assets"),
+
+            components: path.join(__dirname, "..", "app/js/components"),
+            service: path.join(__dirname, "..", "app/js/service"),
+            stores: path.join(__dirname, "..", "app/js/stores"),
+            view: path.join(__dirname, "..", "app/js/view"),
+
+            util: path.join(__dirname, "..", "app/js/util.js"),
+            config: path.join(__dirname, "..", "app/js/config.js")
+        },
+        extensions: ['', '.js', 'jsx']
+    },
     module: {
         loaders: [{
             test: /\.js$/,

@@ -12,6 +12,7 @@
 ### 项目说明：
 
 没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js
+项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post
 
 ### 项目开始
 
@@ -27,8 +28,28 @@ $ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](htt
 $ npm start
 ```
 
-浏览器会自动打开 [http://localhost:3000](http://localhost:3000)
+浏览器会自动打开 [http://localhost:3000](http://localhost:3000) （默认）
 推荐设置chrome为默认浏览器，what？你不用chrome，额……好吧
+
+
+#### 开发(开启ajax接口反向代理，跨域利器)
+浏览器跨域的痛，宝宝心里哭，但是宝宝不说。
+```
+$ npm start:proxy
+```
+**注：需要先配置下你的根目录下的config.json**
+```json
+{
+  "proxy": {
+    "host": "xxx.xxx.xxx.xxx",
+    "port": "xxxx"
+  }
+}
+```
+浏览器会自动打开 [http://localhost:3000](http://localhost:3000) (默认)
+越来越多的前端开发采取前后端分离的单页应用，ajax跨域是个让人头痛的问题（chrome在PC上可以设置跨域，但是，问题来了，你在手机上真没进行测试？？，那么就用该命令吧）
+
+
 
 #### build
 ```
