@@ -8,8 +8,13 @@ var config = require('../config.json');
 exports.proxy = function (req, res) {
 	// 获取 /api/ 之后的的 URL 路径
 	var path = req.path.replace(/^\/api/, "");
+	var contents = querystring.stringify(req.query);
+
+	if (req.method.toUpperCase() === 'GET') {
+		path += '?' + contents;
+	}
+
 	// 获取请求参数
-	var contents = querystring.stringify(req.querystring);
 	var options = {
 		host: config.proxy.host,
 		port: config.proxy.port,
