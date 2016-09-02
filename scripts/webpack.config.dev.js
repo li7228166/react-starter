@@ -6,10 +6,6 @@ var merge = require('webpack-merge');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
-
-console.log(process.env.PROXY);
-console.log(process.env.NODE_ENV);
-
 module.exports = merge(webpackConfig, {
 	devtool: 'source-map',
 	entry: [
@@ -40,7 +36,7 @@ module.exports = merge(webpackConfig, {
 			'process.env': {
 				NODE_ENV: JSON.stringify('development')
 			},
-			__PROXY__: process.env.PROXY || false
+			__PROXY__: process.env.PROXY || false,
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
