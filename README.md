@@ -65,6 +65,13 @@ $ npm run release
 
 生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080) ，在本地预览待部署的项目
 
+#### 发布(开启ajax接口反向代理，模拟真实发布环境进行测试)
+```
+$ npm run release:proxy
+```
+
+生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080),同时开始api反向代理 ，在本地预览待部署的项目
+
 
 #### 部署
 ```
