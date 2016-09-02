@@ -6,9 +6,6 @@
     "port": "22",
     "remotePath": "/data/html/admin/aaaa"
   },
-  "localServer": {
-    "host": "localhost"
-  },
   "proxy": {
     "host": "115.28.169.134",
     "port": "1976"

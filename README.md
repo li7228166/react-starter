@@ -12,7 +12,7 @@
 ### 项目说明：
 
 没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js
-项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post
+项目根目录下的config.json文件可配置远程部署服务器以及ajax跨域服务器的host、post
 
 ### 项目开始
 

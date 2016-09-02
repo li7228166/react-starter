@@ -8,10 +8,9 @@ var config = require('../config.json');
 exports.proxy = function (req, res) {
 	// 获取 /api/ 之后的的 URL 路径
 	var path = req.path.replace(/^\/api/, "");
-	var contents = querystring.stringify(req.query);
 
 	if (req.method.toUpperCase() === 'GET') {
-		path += '?' + contents;
+		path += '?' + querystring.stringify(req.query);
 	}
 
 	// 获取请求参数
@@ -44,7 +43,6 @@ exports.proxy = function (req, res) {
 	});
 
 	// 向服务器发送请求
-	request.write(contents);
+	request.write(querystring.stringify(req.body));
 	request.end();
-
 };
