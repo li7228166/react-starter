@@ -22,10 +22,14 @@ module.exports = merge(webpackConfig, {
 	module: {
 		loaders: [{
 			test: /\.css/,
-			loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader")
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader", {
+                publicPath: '../'
+            })
 		}, {
 			test: /\.less/,
-			loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader")
+			loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader", {
+                publicPath: '../'
+            })
 		}]
 	},
 	postcss: function () {
