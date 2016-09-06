@@ -17,7 +17,7 @@ module.exports = merge(webpackConfig, {
 	output: {
 		path: path.join(__dirname, '..', 'dist'),
 		filename: 'script/app.[hash:8].js',
-		publicPath: '/'
+		publicPath: './'
 	},
 	module: {
 		loaders: [{
