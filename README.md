@@ -11,8 +11,7 @@
 
 ### 项目说明：
 
-没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js
-项目根目录下的config.json文件可配置远程部署服务器以及ajax跨域服务器的host、post
+没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js  <br />项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post
 
 ### 项目开始
 
@@ -28,8 +27,7 @@ $ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](htt
 $ npm start
 ```
 
-浏览器会自动打开 [http://localhost:3000](http://localhost:3000) （默认）
-推荐设置chrome为默认浏览器，what？你不用chrome，额……好吧
+浏览器会自动打开 [http://localhost:3000](http://localhost:3000) （默认）   <br />推荐设置chrome为默认浏览器，what？你不用chrome，额……好吧
 
 
 #### 开发(开启ajax接口反向代理，跨域利器)
@@ -46,9 +44,7 @@ $ npm start:proxy
   }
 }
 ```
-浏览器会自动打开 [http://localhost:3000](http://localhost:3000) (默认)
-本地服务会自动代理/api/开头的请求到proxy设置的服务器
-越来越多的前端开发采取前后端分离的单页应用，ajax跨域是个让人头痛的问题（chrome在PC上可以设置跨域，但是，问题来了，你在手机上真没进行测试？？，那么就用该命令吧）
+浏览器会自动打开 [http://localhost:3000](http://localhost:3000) (默认)   <br />本地服务会自动代理/api/开头的请求到proxy设置的服务器   <br />越来越多的前端开发采取前后端分离的单页应用，ajax跨域是个让人头痛的问题（chrome在PC上可以设置跨域，但是，问题来了，你在手机上真没进行测试？？，那么就用该命令吧）
 
 
 
@@ -65,13 +61,6 @@ $ npm run release
 ```
 
 生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080) ，在本地预览待部署的项目
-
-#### 发布(开启ajax接口反向代理，模拟真实发布环境进行测试)
-```
-$ npm run release:proxy
-```
-
-生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080),同时开始api反向代理 ，在本地预览待部署的项目
 
 
 #### 部署
