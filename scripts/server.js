@@ -23,45 +23,29 @@ app.post("/api/*", require("./proxy").proxy);
  * 处理开发模式和生产模式
  * */
 if (process.env.NODE_ENV === 'development') {
-	port = 4000;
-	var webpackDevMiddleware = require('webpack-dev-middleware'),
-		webpackHotMiddleware = require('webpack-hot-middleware'),
-		webpackDevConfig = require('./webpack.config.dev.js');
+    port = 4000;
+    var webpackDevMiddleware = require('webpack-dev-middleware'),
+        webpackHotMiddleware = require('webpack-hot-middleware'),
+        webpackDevConfig = require('./webpack.config.dev.js');
 
-	var compiler = webpack(webpackDevConfig);
-	app.use(webpackDevMiddleware(compiler, {
-		noInfo: true,
-		publicPath: webpackDevConfig.output.publicPath,
-		stats: {
-			colors: true
-		}
-	}));
-	app.use(webpackHotMiddleware(compiler));
+    var compiler = webpack(webpackDevConfig);
+    app.use(webpackDevMiddleware(compiler, {
+        noInfo: true,
+        publicPath: webpackDevConfig.output.publicPath,
+        stats: {
+            colors: true
+        }
+    }));
+    app.use(webpackHotMiddleware(compiler));
 } else {
-	app.use(express.static(path.join(__dirname, '..', 'dist')))
+    app.use(express.static(path.join(__dirname, '..', 'dist')))
 }
-
-/*
- * 获得当前本机IP
- * */
-var localIp = (function getIPAdress() {
-	var interfaces = require('os').networkInterfaces();
-	for (var devName in interfaces) {
-		var iface = interfaces[devName];
-		for (var i = 0; i < iface.length; i++) {
-			var alias = iface[i];
-			if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
-				return alias.address;
-			}
-		}
-	}
-})()
 
 /*
  * 开启服务
  * */
 app.listen(port, function () {
-	console.log('Local http://localhost:' + port + '/\n');
-	console.log('External http://' + localIp + ':' + port + '/\n');
-	open("http://localhost:" + port);
+    console.log('Local http://localhost:' + port + '/\n');
+    console.log('External http://' + require('./util').localIp + ':' + port + '/\n');
+    open("http://localhost:" + port);
 });

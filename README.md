@@ -11,7 +11,7 @@
 
 ### 项目说明：
 
-没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到vender.[hash:8].js  <br />项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post
+没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到dll目录的vender.[hash:8].js  <br />项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post<br/>(注：执行npm install 会自动编译vender依赖到dll目录，或没有自动运行，可使用npm run dll手动进行编译)
 
 ### 项目开始
 
@@ -46,7 +46,10 @@ $ npm start:proxy
 ```
 浏览器会自动打开 [http://localhost:3000](http://localhost:3000) (默认)   <br />本地服务会自动代理/api/开头的请求到proxy设置的服务器   <br />越来越多的前端开发采取前后端分离的单页应用，ajax跨域是个让人头痛的问题（chrome在PC上可以设置跨域，但是，问题来了，你在手机上真没进行测试？？，那么就用该命令吧）
 
-
+#### 开发(同时重新编译第三方依赖)
+```
+$ npm start:dll
+```
 
 #### build
 ```
@@ -80,3 +83,16 @@ $ npm run deploy
 }
 ```
 在生成待部署文件到dist目录，并直接部署到指定服务器
+
+#### 编译依赖
+```
+$ npm run dll
+```
+默认将按照package.json的dependencies配置进行打包，如有需要可手动修改scripts/webpack.config.dll.js
+```
+entry: {
+    vendor: [
+        ...Object.keys(packageConfig.dependencies)
+    ]
+}
+```

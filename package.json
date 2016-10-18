@@ -13,7 +13,7 @@
     "release:proxy": "cross-env PROXY=true npm run build && node scripts/server.js",
     "deploy": "npm run build && gulp upload",
     "dll": "rimraf dll && webpack --config scripts/webpack.config.dll.js --progress",
-    "postinstall": "typings install && npm run dll"
+    "postinstall": "npm run dll"
   },
   "author": "lxp",
   "license": "ISC",
@@ -48,6 +48,7 @@
     "open": "0.0.5",
     "postcss-loader": "^0.10.0",
     "precss": "^1.4.0",
+    "query-string": "^4.2.3",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.4",
     "redbox-react": "^1.2.4",
