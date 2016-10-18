@@ -1,15 +1,27 @@
 var path = require('path');
+var fs = require("fs");
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpackConfig = require('./webpack.config.js');
 var merge = require('webpack-merge');
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+
+
+/*获得vendor文件*/
+var vendorUrl = '';
+var files = fs.readdirSync(path.join(__dirname, '..', 'dll'));
+files.forEach(function (val) {
+	var exc = new RegExp(/vendor.*.js$/ig);
+	if (exc.test(val)) {
+		vendorUrl = val;
+	}
+});
 
 module.exports = merge(webpackConfig, {
 	devtool: 'source-map',
 	entry: [
-		'babel-polyfill',
 		'webpack/hot/dev-server',
 		'webpack-hot-middleware/client',
 		path.join(__dirname, '..', 'app', 'js', 'index')
@@ -36,7 +48,11 @@ module.exports = merge(webpackConfig, {
 			'process.env': {
 				NODE_ENV: JSON.stringify('development')
 			},
-			__PROXY__: process.env.PROXY || false,
+			__PROXY__: process.env.PROXY || false
+		}),
+		new webpack.DllReferencePlugin({
+			context: path.join(__dirname),
+			manifest: require(path.join(__dirname, '..', 'dll', 'manifest.json'))
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
@@ -45,6 +61,12 @@ module.exports = merge(webpackConfig, {
 			title: 'react通用开发环境',
 			filename: 'index.html',
 			template: path.join(__dirname, '..', 'app', 'index.html')
-		})
+		}),
+		new AddAssetHtmlPlugin([
+			{
+				filepath: require.resolve(path.join(__dirname, '..', 'dll', vendorUrl)),
+				includeSourcemap: false
+			}
+		])
 	]
 });
