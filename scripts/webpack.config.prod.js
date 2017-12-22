@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var merge = require('webpack-merge');
-var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var webpackConfig = require('./webpack.config.js');
 var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
@@ -18,20 +17,24 @@ module.exports = merge(webpackConfig, {
         publicPath: './'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader", {
-                publicPath: '../'
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: "css-loader",
+                publicPath: "../"
             })
         }, {
             test: /\.less/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader!postcss-loader!less-loader", {
-                publicPath: '../'
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: [
+                    "css-loader",
+                    "less-loader"
+                ],
+                publicPath: "../"
             })
         }]
-    },
-    postcss: function () {
-        return [precss, autoprefixer];
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -44,14 +47,18 @@ module.exports = merge(webpackConfig, {
             context: path.join(__dirname),
             manifest: require(path.join(__dirname, '..', 'dll', 'manifest.json'))
         }),
-        new ExtractTextPlugin("style/app.[hash:8].css"),
+        new ExtractTextPlugin({
+            filename: "style/app.[hash:8].css",
+            disable: false,
+            allChunks: true
+        }),
         new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            sourceMap: false,
             compressor: {
                 warnings: false
             }
         }),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin({
             minSizeReduce: 1.5,
             moveToParents: true

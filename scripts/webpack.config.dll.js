@@ -6,7 +6,7 @@ var packageConfig = require('../package.json');
 
 module.exports = merge(webpackConfig, {
     output: {
-        path: 'dll',
+        path: path.join(__dirname, '..', 'dll'),
         filename: '[name].[hash:8].js',
         library: '[name]'
     },
@@ -22,6 +22,8 @@ module.exports = merge(webpackConfig, {
             context: path.join(__dirname)
         }),
         new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            sourceMap: false,
             compressor: {
                 warnings: false
             }

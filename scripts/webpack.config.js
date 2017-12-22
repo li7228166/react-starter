@@ -15,26 +15,30 @@ module.exports = {
             util: path.join(__dirname, "..", "app/js/util.js"),
             config: path.join(__dirname, "..", "app/js/config.js")
         },
-        extensions: ['', '.js', 'jsx']
+        extensions: ['.js', 'json']
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            use: 'babel-loader'
         }, {
             test: /\.(png|jpg)$/,
-            loader: 'url',
-            query: {
-                name: 'assets/images/[hash:8].[ext]',
-                limit: 8192
+            use: {
+                loader: 'url-loader',
+                options: {
+                    name: 'assets/images/[hash:8].[ext]',
+                    limit: 8192
+                }
             }
         }, {
             test: /\.(woff|woff2|ttf|svg|eot)(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "url",
-            query: {
-                name: 'assets/fonts/[hash:8].[ext]',
-                limit: 10000
+            use: {
+                loader: "url-loader",
+                options: {
+                    name: 'assets/fonts/[hash:8].[ext]',
+                    limit: 10000
+                }
             }
         }]
     }

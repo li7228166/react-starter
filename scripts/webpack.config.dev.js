@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpackConfig = require('./webpack.config.js');
 var merge = require('webpack-merge');
-var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
@@ -15,21 +14,40 @@ module.exports = merge(webpackConfig, {
         path.join(__dirname, '..', 'app', 'js', 'index')
     ],
     output: {
-        path: path.join(__dirname, '..'),
-        filename: 'dist/bundle.js',
+        path: path.join(__dirname, '..', 'dist'),
+        filename: 'bundle.js',
         publicPath: '/'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.css/,
-            loader: "style-loader!css-loader!postcss-loader"
+            use: ["style-loader", {
+                loader: "css-loader",
+                options: {
+                    sourceMap: true
+                }
+            }, {
+                loader: "less-loader",
+                options: {
+                    sourceMap: true
+                }
+            }]
         }, {
             test: /\.less/,
-            loader: "style-loader!css-loader!postcss-loader!less-loader"
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader",
+                options: {
+                    sourceMap: true
+                }
+            }, {
+                loader: "less-loader",
+                options: {
+                    sourceMap: true
+                }
+            }]
         }]
-    },
-    postcss: function () {
-        return [precss, autoprefixer];
     },
     plugins: [
         new webpack.DefinePlugin({
@@ -42,9 +60,8 @@ module.exports = merge(webpackConfig, {
             context: path.join(__dirname),
             manifest: require(path.join(__dirname, '..', 'dll', 'manifest.json'))
         }),
-        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             title: 'react通用开发环境',
             filename: 'index.html',

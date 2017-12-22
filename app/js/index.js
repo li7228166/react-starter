@@ -12,7 +12,7 @@ export default class Index extends Component {
 		console.log(__PROXY__);//是否开启反向API代理;
 		return (
 			<div>
-				<p>react通用开发环境</p>
+				<p>react通用开发环2境</p>
 				<img src={png}/>
 				{
 					__PROXY__ ? <div>已开启API反向代理</div> : <div>未开启API反向代理</div>
