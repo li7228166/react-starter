@@ -8,6 +8,7 @@
 - 支持图片、图标字体等资源的编译
 - 支持文件MD5戳，解决文件缓存问题
 - 支持一键部署项目到服务器
+- 支持HappyPack多线程编译
 
 ### 项目说明：
 
@@ -24,16 +25,21 @@ $ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](htt
 ### 预置命令
 #### 开发
 ```
-$ npm start
+$ yarn start
 ```
+启动开发模式
 
-浏览器会自动打开 [http://localhost:3000](http://localhost:3000) （默认）   <br />推荐设置chrome为默认浏览器，what？你不用chrome，额……好吧
+#### 开发(多线程)
+```
+$ yarn start:with_happypack
+```
+已多线程的模式启动
 
 
 #### 开发(开启ajax接口反向代理，跨域利器)
 浏览器跨域的痛，宝宝心里哭，但是宝宝不说。
 ```
-$ npm start:proxy
+$ yarn start:proxy
 ```
 **注：需要先配置下你的根目录下的config.json**
 ```json
@@ -48,19 +54,19 @@ $ npm start:proxy
 
 #### 开发(同时重新编译第三方依赖)
 ```
-$ npm start:dll
+$ yarn start:dll
 ```
 
 #### build
 ```
-$ npm run build
+$ yarn run build
 ```
 
 生成待部署文件到dist目录
 
 #### 发布
 ```
-$ npm run release
+$ yarn run release
 ```
 
 生成待部署文件到dist目录，并打开浏览器 [http://localhost:8080](http://localhost:8080) ，在本地预览待部署的项目
@@ -68,7 +74,7 @@ $ npm run release
 
 #### 部署
 ```
-$ npm run deploy
+$ yarn run deploy
 ```
 **注：需要先配置下你的根目录下的config.json**
 ```json
@@ -86,7 +92,7 @@ $ npm run deploy
 
 #### 编译依赖
 ```
-$ npm run dll
+$ yarn run dll
 ```
 默认将按照package.json的dependencies配置进行打包，如有需要可手动修改scripts/webpack.config.dll.js
 ```
