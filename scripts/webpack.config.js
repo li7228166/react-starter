@@ -1,6 +1,8 @@
-var path = require('path');
+const path = require('path');
+const HappyPack = require('happypack');
+const os = require('os');
 
-module.exports = {
+let config = {
     resolve: {
         alias: {
             js: path.join(__dirname, "..", "app/js"),
@@ -21,7 +23,7 @@ module.exports = {
         rules: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            use: 'babel-loader'
+            use: process.env.USE_HAPPYPACK ? 'happypack/loader' : 'babel-loader'
         }, {
             test: /\.(png|jpg)$/,
             use: {
@@ -41,5 +43,16 @@ module.exports = {
                 }
             }
         }]
-    }
+    },
+    plugins: []
 };
+
+if (process.env.USE_HAPPYPACK) {
+    config.plugins.push(new HappyPack({
+        threads: 4,
+        threadPool: HappyPack.ThreadPool({size: os.cpus().length}),
+        loaders: ['babel-loader'],
+        debug: true
+    }))
+}
+module.exports = config;

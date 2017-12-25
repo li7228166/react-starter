@@ -1,15 +1,15 @@
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var webpack = require('webpack');
-var port = process.env.PORT || 8080;
-var open = require("open");
-var config = require('../config.json');
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const webpack = require('webpack');
+let port = process.env.PORT || 8080;
+const open = require("open");
+const config = require('../config.json');
 
 /*
  * 初始化
  * */
-var app = express();
+const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -24,13 +24,13 @@ app.post("/api/*", require("./proxy").proxy);
  * */
 if (process.env.NODE_ENV === 'development') {
     port = 4000;
-    var webpackDevMiddleware = require('webpack-dev-middleware'),
+    const webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         webpackDevConfig = require('./webpack.config.dev.js');
 
-    var compiler = webpack(webpackDevConfig);
+    const compiler = webpack(webpackDevConfig);
     app.use(webpackDevMiddleware(compiler, {
-        noInfo: true,
+        logLevel: 'error',
         publicPath: webpackDevConfig.output.publicPath,
         stats: {
             colors: true
@@ -45,7 +45,6 @@ if (process.env.NODE_ENV === 'development') {
  * 开启服务
  * */
 app.listen(port, function () {
-    console.log('Local http://localhost:' + port + '/\n');
-    console.log('External http://' + require('./util').localIp + ':' + port + '/\n');
-    open("http://localhost:" + port);
+    console.log('Local http://localhost:' + port + '/\nExternal http://' + require('./util').localIp + ':' + port + '/\n');
+    //open("http://localhost:" + port);
 });

@@ -1,10 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var webpackConfig = require('./webpack.config.js');
-var merge = require('webpack-merge');
-var autoprefixer = require('autoprefixer');
-var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpackConfig = require('./webpack.config.js');
+const merge = require('webpack-merge');
+const autoprefixer = require('autoprefixer');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = merge(webpackConfig, {
     devtool: 'source-map',

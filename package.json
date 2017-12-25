@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "start": "yarn run clean && cross-env NODE_ENV=development node scripts/server.js",
+    "start:with_happypack": "yarn run clean && cross-env NODE_ENV=development USE_HAPPYPACK=true node scripts/server.js",
     "start:dll": "yarn run dll && yarn start",
     "start:proxy": "yarn run clean && cross-env NODE_ENV=development PROXY=true node scripts/server.js",
     "build": "yarn run clean && cross-env NODE_ENV=production webpack --config scripts/webpack.config.prod.js --progress",
@@ -13,7 +14,8 @@
     "release:proxy": "cross-env PROXY=true yarn run build && node scripts/server.js",
     "deploy": "yarn run build && gulp upload",
     "dll": "rimraf dll && webpack --config scripts/webpack.config.dll.js --progress",
-    "postinstall": "yarn run dll"
+    "postinstall": "yarn run dll",
+    "profile": "webpack --config scripts/webpack.config.dev.js --profile --json > stats.json"
   },
   "author": "lxp",
   "license": "ISC",
@@ -42,6 +44,7 @@
     "file-loader": "^1.1.6",
     "gulp": "^3.9.1",
     "gulp-ssh": "^0.6.0",
+    "happypack": "^4.0.0",
     "html-webpack-plugin": "^2.16.1",
     "less": "^2.6.1",
     "less-loader": "^4.0.5",

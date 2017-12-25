@@ -1,11 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var merge = require('webpack-merge');
-var autoprefixer = require('autoprefixer');
-var webpackConfig = require('./webpack.config.js');
-var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const autoprefixer = require('autoprefixer');
+const webpackConfig = require('./webpack.config.js');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = merge(webpackConfig, {
     entry: {
