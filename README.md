@@ -12,14 +12,14 @@
 
 ### 项目说明：
 
-没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到dll目录的vender.[hash:8].js  <br />项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post<br/>(注：执行npm install 会自动编译vender依赖到dll目录，或没有自动运行，可使用npm run dll手动进行编译)
+没有预置react全家桶，可根据项目需要自行install，公共依赖代码会按照package.json的dependencies配置，提取到dll目录的vender.[hash:8].js  <br />项目根目录下的config.json文件可配置本地web服务的host、远程部署服务器以及ajax跨域服务器的host、post<br/>(注：yarn install 会自动编译vender依赖到dll目录，或没有自动运行，可使用yarn run dll手动进行编译)
 
 ### 项目开始
 
 ```
 $ git clone https://github.com/li7228166/react-starter.git
 $ cd react-starter
-$ npm install（因为中国强，如果速度太慢，可尝试使用[cnpm](https://npm.taobao.org/)）
+$ yarn install
 ```
 
 ### 预置命令
