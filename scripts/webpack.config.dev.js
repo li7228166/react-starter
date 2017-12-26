@@ -21,15 +21,19 @@ module.exports = merge(webpackConfig, {
     module: {
         rules: [{
             test: /\.css/,
-            use: ["style-loader", {
+            use: [{
+                loader: "style-loader"
+            }, {
                 loader: "css-loader",
                 options: {
                     sourceMap: true
                 }
             }, {
-                loader: "less-loader",
+                loader: "postcss-loader",
                 options: {
-                    sourceMap: true
+                    config: {
+                        path: path.join(__dirname, 'dist', 'postcss.config.js')
+                    }
                 }
             }]
         }, {
@@ -40,6 +44,13 @@ module.exports = merge(webpackConfig, {
                 loader: "css-loader",
                 options: {
                     sourceMap: true
+                }
+            }, {
+                loader: "postcss-loader",
+                options: {
+                    config: {
+                        path: path.join(__dirname, 'dist', 'postcss.config.js')
+                    }
                 }
             }, {
                 loader: "less-loader",

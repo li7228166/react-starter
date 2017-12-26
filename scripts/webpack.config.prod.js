@@ -21,7 +21,15 @@ module.exports = merge(webpackConfig, {
             test: /\.css/,
             use: ExtractTextPlugin.extract({
                 fallback: "style-loader",
-                use: "css-loader",
+                use: ["css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            config: {
+                                path: path.join(__dirname, 'dist', 'postcss.config.js')
+                            }
+                        }
+                    }],
                 publicPath: "../"
             })
         }, {
@@ -30,6 +38,14 @@ module.exports = merge(webpackConfig, {
                 fallback: "style-loader",
                 use: [
                     "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            config: {
+                                path: path.join(__dirname, 'dist', 'postcss.config.js')
+                            }
+                        }
+                    },
                     "less-loader"
                 ],
                 publicPath: "../"
