@@ -29,16 +29,40 @@ if (process.env.NODE_ENV === 'development') {
         webpackDevConfig = require('./webpack.config.dev.js');
 
     const compiler = webpack(webpackDevConfig);
-    app.use(webpackDevMiddleware(compiler, {
+    const devMiddleware = webpackDevMiddleware(compiler, {
         logLevel: 'error',
         publicPath: webpackDevConfig.output.publicPath,
         stats: {
             colors: true
         }
-    }));
+    });
+    app.use(devMiddleware);
     app.use(webpackHotMiddleware(compiler));
+    app.use((req, res, next) => {
+        if (req.path.indexOf('favicon.ico') > 0) {
+            res.sendFile(path.join(__dirname, '../app/assets/images/favicon.ico'));
+        } else if (req.method === 'GET' && req.accepts('html')) {
+            const filename = path.join(compiler.outputPath, 'index.html');
+            res.write(devMiddleware.fileSystem.readFileSync(filename));
+            res.send();
+            next();
+        } else {
+            next();
+        }
+    });
 } else {
-    app.use(express.static(path.join(__dirname, '..', 'dist')))
+    app.use("**/script", express.static(path.join(__dirname, '../dist/script')));
+    app.use("**/style", express.static(path.join(__dirname, '../dist/style')));
+    app.use("**/assets", express.static(path.join(__dirname, '../dist/assets')));
+    app.use(function (req, res) {
+        if (req.path.indexOf('/api') >= 0) {
+            res.send("server text");
+        } else if (req.path.indexOf('favicon.ico') > 0) {
+            res.sendFile(path.join(__dirname, '../dist/favicon.ico'));
+        } else {
+            res.sendFile(path.join(__dirname, '../dist/index.html'));
+        }
+    });
 }
 
 /*
