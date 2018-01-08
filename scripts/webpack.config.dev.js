@@ -31,6 +31,7 @@ module.exports = merge(webpackConfig, {
             }, {
                 loader: "postcss-loader",
                 options: {
+                    sourceMap: true,
                     config: {
                         path: path.join(__dirname, 'dist', 'postcss.config.js')
                     }
@@ -48,6 +49,7 @@ module.exports = merge(webpackConfig, {
             }, {
                 loader: "postcss-loader",
                 options: {
+                    sourceMap: true,
                     config: {
                         path: path.join(__dirname, 'dist', 'postcss.config.js')
                     }
