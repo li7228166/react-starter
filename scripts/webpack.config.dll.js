@@ -11,9 +11,7 @@ module.exports = merge(webpackConfig, {
         library: '[name]'
     },
     entry: {
-        vendor: [
-            ...Object.keys(packageConfig.dependencies)
-        ]
+        vendor: Object.keys(packageConfig.dependencies)
     },
     plugins: [
         new webpack.DllPlugin({
