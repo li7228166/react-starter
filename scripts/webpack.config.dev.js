@@ -23,10 +23,7 @@ module.exports = merge(webpackConfig, {
             use: [{
                 loader: "style-loader"
             }, {
-                loader: "css-loader",
-                options: {
-                    sourceMap: true
-                }
+                loader: "css-loader"
             }, {
                 loader: "postcss-loader",
                 options: {
